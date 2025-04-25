@@ -1,0 +1,6 @@
+require('nerdwave.options')
+require('nerdwave.redirect')
+require('nerdwave.lazy')
+require('nerdwave.keybinds')
+require('nerdwave.lsp')
+print('Started!!')
