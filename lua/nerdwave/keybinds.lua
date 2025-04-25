@@ -79,7 +79,13 @@ vim.keymap.set(
 )
 vim.keymap.set(
   'n',
+  '<leader>pn',
+  function() require('telescope').extensions.fidget.fidget({ previewer = true }) end,
+  { noremap = true, desc = 'Find in current buffer' }
+)
+vim.keymap.set(
+  'n',
   '<leader>ss',
-  function() telescopeBuiltin.builtin(require('telescope.themes').get_dropdown({ previewer = true })) end,
+  function() telescopeBuiltin.builtin(require('telescope.themes').get_dropdown({ previewer = false })) end,
   { noremap = true, desc = 'Show telescope builtin' }
 )

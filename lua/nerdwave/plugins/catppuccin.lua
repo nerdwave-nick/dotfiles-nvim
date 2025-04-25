@@ -46,17 +46,17 @@ return {
       integrations = {
         cmp = true,
         treesitter = true,
+
         treesitter_context = true,
         mason = true,
-        render_markdown = true,
         telescope = { enabled = true },
-        lsp_trouble = true,
         gitsigns = true,
         indent_blankline = {
           enabled = true,
           scope_color = 'lavender', -- catppuccin color (eg. `lavender`) Default: text
           colored_indent_levels = true,
         },
+        fidget = true,
       },
     })
     vim.cmd('colorscheme catppuccin')

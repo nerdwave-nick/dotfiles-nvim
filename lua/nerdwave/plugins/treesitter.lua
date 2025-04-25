@@ -1,6 +1,7 @@
 return {
   'nvim-treesitter/nvim-treesitter',
-  lazy = true, event = "BufReadPost",
+  lazy = true,
+  event = 'BufReadPost',
   config = function()
     require('nvim-treesitter.configs').setup({
       ignore_install = {},

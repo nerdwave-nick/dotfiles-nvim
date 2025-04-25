@@ -1,4 +1,3 @@
-
 return {
   {
     'nvim-telescope/telescope.nvim',
@@ -9,7 +8,8 @@ return {
     'nvim-telescope/telescope-ui-select.nvim',
     dependencies = { 'nvim-telescope/telescope.nvim' },
     config = function()
-     require('telescope').load_extension('ui-select')
+      require('telescope').load_extension('fidget')
+      require('telescope').load_extension('ui-select')
     end,
-  }
+  },
 }

@@ -1,33 +1,38 @@
-vim.lsp.config('bashls', require('nerdwave.lsp.bashls'))
-vim.lsp.config('eslint', require('nerdwave.lsp.eslint'))
-vim.lsp.config('golang_ci_lint', require('nerdwave.lsp.golang_ci_lint'))
-vim.lsp.config('gopls', require('nerdwave.lsp.gopls'))
-vim.lsp.config('lua_ls', require('nerdwave.lsp.lua_ls'))
-vim.lsp.config('tsserver', require('nerdwave.lsp.tsserver'))
-vim.lsp.config('volar', require('nerdwave.lsp.volar'))
-vim.lsp.config('json_lsp', require('nerdwave.lsp.json_lsp'))
+local neoconf = require('neoconf')
 
-local function conditional_enable(lsps)
-  for _, value in ipairs(lsps) do
-    if require('neoconf').get('lspconfig.' .. value .. '.disabled') then
-      print('skipping ' .. value .. ' lsp setup due to neoconf...')
-      vim.lsp.enable(value, false)
+local function setup_lsp(lsp)
+  local config = neoconf.get('lsp.' .. lsp)
+  if config == nil then config = {} end
+  local disabled = false
+  if config.disabled ~= nil then disabled = config.disabled end
+  local lspConfig = {}
+  if config.config ~= nil then lspConfig = config.config end
+
+  vim.lsp.config(lsp, vim.tbl_deep_extend('force', require('nerdwave.lsp.' .. lsp), lspConfig))
+
+  if disabled then
+    vim.lsp.enable(lsp, false)
+    vim.notify('lsp ' .. lsp .. 'skipped...', vim.log.levels.WARN)
+  else
+    vim.lsp.enable(lsp, true)
+    vim.notify('lsp ' .. lsp .. ' enabled...', vim.log.levels.DEBUG)
+  end
+end
+
+local function setup_lsps()
+  local config_path = vim.fn.stdpath('config')
+  for _, file in ipairs(vim.fn.readdir(config_path .. '/lua/nerdwave/lsp')) do
+    if string.sub(file, -4) == '.lua' then
+      local str = file:gsub('%.lua$', '')
+      setup_lsp(str)
     else
-      vim.lsp.enable(value, true)
+      vim.notify('found invalid lsp file: ' .. file, vim.log.levels.WARN)
     end
   end
 end
 
-conditional_enable({
-  'bashls',
-  'golang_ci_lint',
-  'gopls',
-  'eslint',
-  'lua_ls',
-  'tsserver',
-  'volar',
-  'json_lsp',
-})
+-- this sets up the lsps in the lsp subfolder automatically with the custom logic respecting my neoconf fork
+setup_lsps()
 
 local on_attach_keymap = function(bufnr)
   local map = function(mode, key, fn, desc)
