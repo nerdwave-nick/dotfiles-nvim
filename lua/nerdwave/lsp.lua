@@ -5,6 +5,7 @@ vim.lsp.config('gopls', require('nerdwave.lsp.gopls'))
 vim.lsp.config('lua_ls', require('nerdwave.lsp.lua_ls'))
 vim.lsp.config('tsserver', require('nerdwave.lsp.tsserver'))
 vim.lsp.config('volar', require('nerdwave.lsp.volar'))
+vim.lsp.config('json_lsp', require('nerdwave.lsp.json_lsp'))
 
 local function conditional_enable(lsps)
   for _, value in ipairs(lsps) do
@@ -25,6 +26,7 @@ conditional_enable({
   'lua_ls',
   'tsserver',
   'volar',
+  'json_lsp',
 })
 
 local on_attach_keymap = function(bufnr)
