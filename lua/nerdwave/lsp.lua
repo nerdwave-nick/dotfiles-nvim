@@ -1,6 +1,3 @@
--- make sure mason is set up first
-require('mason').setup()
-
 vim.lsp.config('bashls', require('nerdwave.lsp.bashls'))
 vim.lsp.config('eslint', require('nerdwave.lsp.eslint'))
 vim.lsp.config('golang_ci_lint', require('nerdwave.lsp.golang_ci_lint'))
@@ -9,7 +6,18 @@ vim.lsp.config('lua_ls', require('nerdwave.lsp.lua_ls'))
 vim.lsp.config('tsserver', require('nerdwave.lsp.tsserver'))
 vim.lsp.config('volar', require('nerdwave.lsp.volar'))
 
-vim.lsp.enable({
+local function conditional_enable(lsps)
+  for _, value in ipairs(lsps) do
+    if require('neoconf').get('lspconfig.' .. value .. '.disabled') then
+      print('skipping ' .. value .. ' lsp setup due to neoconf...')
+      vim.lsp.enable(value, false)
+    else
+      vim.lsp.enable(value, true)
+    end
+  end
+end
+
+conditional_enable({
   'bashls',
   'golang_ci_lint',
   'gopls',
@@ -25,7 +33,12 @@ local on_attach_keymap = function(bufnr)
   end
   local telescopeBuiltin = require('telescope.builtin')
 
-  map('n', 'K', vim.lsp.buf.hover, 'Show little hover window, o[k]ay?')
+  map(
+    'n',
+    'K',
+    function() vim.lsp.buf.hover({ silent = true, border = 'rounded' }) end,
+    'Show little hover window, o[k]ay?'
+  )
   map('n', 'gD', vim.lsp.buf.declaration, '[g]o to [D]eclaration')
   map('n', 'gi', telescopeBuiltin.lsp_implementations, '[g]o to [i]mplementation')
   map('n', 'gr', telescopeBuiltin.lsp_references, '[g]o to [r]eferences')

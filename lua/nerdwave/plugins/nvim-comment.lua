@@ -11,10 +11,10 @@ return {
       create_mappings = false,
       comment_empty = false,
       hook = function()
-        if vim.api.nvim_buf_get_option(0, 'filetype') == 'vue' then
+        if vim.api.nvim_get_option_value('filetype', { buf = 0 }) == 'vue' then
           require('ts_context_commentstring.internal').update_commentstring()
-        elseif vim.api.nvim_buf_get_option(0, 'filetype') == 'dosini' then
-          vim.api.nvim_buf_set_option(0, 'commentstring', '# %s')
+        elseif vim.api.nvim_get_option_value('filetype', { buf = 0 }) == 'dosini' then
+          vim.api.nvim_set_option_value('commentstring', '# %s', { buf = 0 })
         end
       end,
     })

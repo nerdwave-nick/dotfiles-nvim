@@ -1,1 +1,1 @@
-return { 'echasnovski/mini.diff' }
+return { 'echasnovski/mini.diff', opts = {} }

@@ -3,8 +3,8 @@ _G.print = function(...)
   local args = { n = select('#', ...), ... }
   local formatted_args = {}
   -- Sanitize the arguments
-  local item = select(i, ...)
   for i = 1, args.n do
+    local item = select(i, ...)
     if not item then item = 'nil' end
     local t_item = type(item)
     -- If the argument is a table, function or "userdata", pass it through vim.inspect
