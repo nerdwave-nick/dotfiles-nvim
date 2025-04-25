@@ -3,6 +3,12 @@ return {
   lazy = false,
   tag = 'v1.6.1', -- Make sure to update this to something recent!
   opts = {
+    progress = {
+      display = {
+        -- Icon shown when LSP progress tasks are in progress
+        progress_icon = { 'dots' },
+      },
+    },
     notification = {
       view = {
         stack_upwards = false,
@@ -13,6 +19,7 @@ return {
         normal_hl = 'Normal',
         border = 'rounded',
         winblend = 0,
+        -- max_width = 30,
       },
     },
   },

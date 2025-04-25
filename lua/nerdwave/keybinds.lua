@@ -81,7 +81,7 @@ vim.keymap.set(
   'n',
   '<leader>pn',
   function() require('telescope').extensions.fidget.fidget({ previewer = true }) end,
-  { noremap = true, desc = 'Find in current buffer' }
+  { noremap = true, desc = 'Show notifications in telescope' }
 )
 vim.keymap.set(
   'n',
@@ -89,3 +89,10 @@ vim.keymap.set(
   function() telescopeBuiltin.builtin(require('telescope.themes').get_dropdown({ previewer = false })) end,
   { noremap = true, desc = 'Show telescope builtin' }
 )
+
+-- codecompanion
+local codecompanion = require('codecompanion')
+vim.keymap.set('n', '<leader>ct', codecompanion.toggle, { noremap = true, desc = 'Toggle code companion buffer' })
+-- cc as shortcut for code companion
+vim.cmd([[cab cc CodeCompanion]])
+vim.keymap.set('n', '<leader>cc', codecompanion.actions, { noremap = true, desc = 'Show code companion actions' })

@@ -19,7 +19,7 @@ M.format_with_notif = function()
     if did_edit then
       vim.notify('Formatted', vim.log.levels.INFO, { title = 'Formatting succeeded' })
     else
-      vim.notify('No changes occurred', vim.log.levels.INFO, { title = 'Formatting succeeded' })
+      vim.notify('No changes occurred', vim.log.levels.DEBUG, { title = 'Formatting succeeded' })
     end
   end
   require('conform').format({ timeout_ms = 1500, lsp_fallback = true }, callback)
