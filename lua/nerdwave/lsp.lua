@@ -57,7 +57,7 @@ local on_attach_keymap = function(bufnr)
   map('n', '<leader>fd', telescopeBuiltin.diagnostics, '[f]ind [d]iagnostics')
   map('n', '<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ctions')
   map('n', '<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
-  map('i', '<C-h>', vim.lsp.buf.signature_help, 'Signature Help')
+  map('i', '<C-h>', function() vim.lsp.buf.signature_help({ silent = true, border = 'rounded' }) end, 'Signature Help')
 end
 
 local lsp_group = vim.api.nvim_create_augroup('CustomLspAutoGroup', {})
@@ -66,5 +66,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     vim.diagnostic.config({ virtual_text = true })
     on_attach_keymap(args.buf)
+
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then return end
+
+    -- if client:supports_method('textDocument/documentColor') then vim.lsp.document_color.enable(true, args.buf) end
+    if client:supports_method('textDocument/inlayHint') then vim.lsp.inlay_hint.enable(true, { bufnr = args.buf }) end
   end,
 })

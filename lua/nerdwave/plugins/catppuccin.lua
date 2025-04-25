@@ -44,9 +44,8 @@ return {
         },
       },
       integrations = {
-        cmp = true,
         treesitter = true,
-
+        blink_cmp = true,
         treesitter_context = true,
         mason = true,
         telescope = { enabled = true },
