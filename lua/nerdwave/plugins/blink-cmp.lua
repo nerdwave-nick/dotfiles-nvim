@@ -3,7 +3,7 @@ return {
   dependencies = {
     'L3MON4D3/LuaSnip',
     'moyiz/blink-emoji.nvim',
-    'Kaiser-Yang/blink-cmp-dictionary',
+    'MahanRahmati/blink-nerdfont.nvim',
     'xzbdmw/colorful-menu.nvim',
   },
   version = '1.*',
@@ -24,6 +24,30 @@ return {
     },
     appearance = {
       nerd_font_variant = 'mono',
+    },
+    sources = {
+      default = {
+        'lsp',
+        'buffer',
+        'snippets',
+        'path',
+        'nerdfont',
+        'emoji',
+      },
+      providers = {
+        nerdfont = {
+          module = 'blink-nerdfont',
+          name = 'Nerd Fonts',
+          score_offset = 15, -- Tune by preference
+          opts = { insert = true }, -- Insert nerdfont icon (default) or complete its name
+        },
+        emoji = {
+          module = 'blink-emoji',
+          name = 'Emoji',
+          score_offset = 15, -- Tune by preference
+          opts = { insert = true }, -- Insert emoji (default) or complete its name
+        },
+      },
     },
     completion = {
       keyword = {
@@ -69,7 +93,9 @@ return {
       },
 
       ghost_text = {
-        enabled = true,
+        -- currently bug in blink, waiting for fix
+        -- see https://github.com/Saghen/blink.cmp/issues/1648
+        enabled = false,
       },
     },
     snippets = { preset = 'luasnip' },

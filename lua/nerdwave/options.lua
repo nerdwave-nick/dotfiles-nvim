@@ -28,7 +28,7 @@ vim.o.foldmethod = 'manual'
 vim.o.mouse = ''
 
 -- Enable break indent
-vim.o.wrap = false
+vim.o.wrap = true
 vim.o.breakindent = true
 vim.o.smartindent = true
 vim.o.linebreak = true
