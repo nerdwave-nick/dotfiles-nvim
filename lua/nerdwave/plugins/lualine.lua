@@ -8,11 +8,37 @@ return {
     function custom_fname:init(options) custom_fname.super.init(self, options) end
 
     function custom_fname:update_status()
-      local data = custom_fname.super.update_status(self)
+      local filename = vim.fn.expand('%:t')
+      local filepath = vim.fn.expand('%:p')
+      local cwd = vim.fn.getcwd() .. '/'
+
+      -- Get relative path to the file from cwd
+      local rel_path = filepath
+      if filepath:sub(1, #cwd) == cwd then rel_path = filepath:sub(#cwd + 1) end
+
+      -- Split the path into directories
+      local dirs = {}
+      for dir in string.gmatch(vim.fs.dirname(rel_path), '[^/]+') do
+        table.insert(dirs, dir)
+      end
+
+      -- Create fish-style shortened path
+      local shortened_dirs = {}
+      for i, dir in ipairs(dirs) do
+        -- First character only for directories
+        if dir:len() > 0 then table.insert(shortened_dirs, dir:sub(1, 1)) end
+      end
+
+      -- Create the shortened path
+      local shortened_path = table.concat(shortened_dirs, '/')
+      if #shortened_path > 0 then shortened_path = shortened_path .. '/' end
+
+      -- Get the project name for the prefix
       local dir = vim.fn.getcwd() or ''
       local projectWithoutBrackets = string.match(dir, '.+/(.+)$')
       local project = '[' .. projectWithoutBrackets .. ']'
-      return project .. ' ' .. data
+
+      return project .. ' ' .. shortened_path .. filename
     end
 
     local is_recording = function()
@@ -48,13 +74,13 @@ return {
       options = {
         icons_enabled = true,
         theme = 'catppuccin',
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
       },
       sections = {
         lualine_a = { 'mode', is_recording },
         lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = { { custom_fname, path = 1 }, clients_lsp, clients_formatter },
+        lualine_c = { { custom_fname, path = 0 }, clients_lsp, clients_formatter },
         lualine_x = { 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
@@ -74,3 +100,4 @@ return {
     })
   end,
 }
+

@@ -6,9 +6,22 @@ return {
     'MahanRahmati/blink-nerdfont.nvim',
     'xzbdmw/colorful-menu.nvim',
   },
+  lazy = false,
   version = '1.*',
   opts = {
     keymap = {
+      preset = 'none',
+      ['<C-space>'] = nil,
+      ['<C-e>'] = nil,
+      ['<C-y>'] = nil,
+      ['<Up>'] = nil,
+      ['<Down>'] = nil,
+      ['<C-p>'] = nil,
+      ['<C-b>'] = nil,
+      ['<C-f>'] = nil,
+      ['<Tab>'] = nil,
+      ['<S-Tab>'] = nil,
+
       ['<C-CR>'] = { 'select_and_accept', 'fallback' },
 
       ['<C-Right>'] = { 'snippet_forward' },
@@ -31,8 +44,6 @@ return {
         'buffer',
         'snippets',
         'path',
-        'nerdfont',
-        'emoji',
       },
       providers = {
         nerdfont = {
@@ -50,6 +61,12 @@ return {
       },
     },
     completion = {
+      accept = {
+        dot_repeat = false,
+        auto_brackets = {
+          enabled = false,
+        },
+      },
       keyword = {
         range = 'prefix',
       },
@@ -75,6 +92,12 @@ return {
         },
         auto_show = true,
       },
+      signature = {
+        enabled = true,
+        window = {
+          border = 'rounded',
+        },
+      },
       documentation = {
         window = {
           min_width = 10,
@@ -91,11 +114,17 @@ return {
         },
         auto_show = true,
       },
-
       ghost_text = {
         -- currently bug in blink, waiting for fix
         -- see https://github.com/Saghen/blink.cmp/issues/1648
         enabled = false,
+      },
+    },
+    fuzzy = {
+      sorts = {
+        'exact',
+        'score',
+        'sort_text',
       },
     },
     snippets = { preset = 'luasnip' },

@@ -8,7 +8,10 @@ local function setup_lsp(lsp)
   local lspConfig = {}
   if config.config ~= nil then lspConfig = config.config end
 
-  vim.lsp.config(lsp, vim.tbl_deep_extend('force', require('nerdwave.lsp.' .. lsp), lspConfig))
+  local lspConf = vim.tbl_deep_extend('force', require('nerdwave.lsp.' .. lsp), lspConfig)
+  lspConf.capabilities = require('blink.cmp').get_lsp_capabilities(nil, true)
+
+  vim.lsp.config(lsp, lspConf)
 
   if disabled then
     vim.lsp.enable(lsp, false)
@@ -64,7 +67,15 @@ local lsp_group = vim.api.nvim_create_augroup('CustomLspAutoGroup', {})
 vim.api.nvim_create_autocmd('LspAttach', {
   group = lsp_group,
   callback = function(args)
-    vim.diagnostic.config({ virtual_lines = true })
+    vim.diagnostic.config({
+      virtual_text = true,
+      virtual_lines = { current_line = true },
+      float = {
+        border = 'rounded',
+      },
+      underline = true,
+      update_in_insert = false,
+    })
     on_attach_keymap(args.buf)
 
     local client = vim.lsp.get_client_by_id(args.data.client_id)
