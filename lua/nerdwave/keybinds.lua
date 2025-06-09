@@ -96,3 +96,13 @@ vim.keymap.set('n', '<leader>ct', codecompanion.toggle, { noremap = true, desc =
 -- cc as shortcut for code companion
 vim.cmd([[cab cc CodeCompanion]])
 vim.keymap.set('n', '<leader>cc', codecompanion.actions, { noremap = true, desc = 'Show code companion actions' })
+
+-- harpoon
+local harpoon = require('harpoon')
+vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end)
+vim.keymap.set('n', '<C-e>', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.keymap.set('n', '<C-h>', function() harpoon:list():select(1) end)
+vim.keymap.set('n', '<C-t>', function() harpoon:list():select(2) end)
+vim.keymap.set('n', '<C-n>', function() harpoon:list():select(3) end)
+vim.keymap.set('n', '<C-s>', function() harpoon:list():select(4) end)
