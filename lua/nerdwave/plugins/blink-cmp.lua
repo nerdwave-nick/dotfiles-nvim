@@ -5,6 +5,8 @@ return {
     'moyiz/blink-emoji.nvim',
     'MahanRahmati/blink-nerdfont.nvim',
     'xzbdmw/colorful-menu.nvim',
+    'saghen/blink.compat',
+    'Kaiser-Yang/blink-cmp-avante',
   },
   lazy = false,
   version = '1.*',
@@ -22,7 +24,7 @@ return {
       ['<Tab>'] = nil,
       ['<S-Tab>'] = nil,
 
-      ['<C-CR>'] = { 'select_and_accept', 'fallback' },
+      ['<C-CR>'] = { 'accept', 'fallback' },
 
       ['<C-Right>'] = { 'snippet_forward' },
       ['<C-Left>'] = { 'snippet_backward' },
@@ -44,8 +46,14 @@ return {
         'buffer',
         'snippets',
         'path',
+        -- 'supermaven',
       },
       providers = {
+        -- create provider
+        supermaven = {
+          name = 'supermaven',
+          module = 'blink.compat.source',
+        },
         nerdfont = {
           module = 'blink-nerdfont',
           name = 'Nerd Fonts',

@@ -10,7 +10,7 @@ return {
   ft = { 'markdown', 'codecompanion' },
   opts = {
     preview = {
-      filetypes = { 'markdown', 'codecompanion' },
+      filetypes = { 'markdown', 'codecompanion', 'Avante', 'AvanteInput' },
       ignore_buftypes = {},
     },
   },
