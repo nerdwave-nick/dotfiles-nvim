@@ -30,7 +30,7 @@ return {
     },
     extensions = {
       vectorcode = {
-        enabled = true,
+        enabled = false,
         opts = {
           add_tool = true,
         },
@@ -63,7 +63,7 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
-    'Davidyz/VectorCode',
+    -- 'Davidyz/VectorCode',
     'echasnovski/mini.diff',
     'ravitemer/codecompanion-history.nvim',
   },
