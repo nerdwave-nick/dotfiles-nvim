@@ -3,23 +3,17 @@ return {
   event = 'VeryLazy',
   version = false, -- Never set this value to "*"! Never!
   opts = {
-    -- add any opts here
-    -- for example
-    provider = 'claude',
+    provider = 'claude-code',
     providers = {
       claude = {
         endpoint = 'https://api.anthropic.com',
-        model = 'claude-opus-4-20250514',
+        model = 'claude-sonnet-4-0', --claude-opus-4-20250514',
         timeout = 30000, -- Timeout in milliseconds
         disabled_tools = { 'fetch' },
         extra_request_body = {
-          temperature = 0.75,
-          max_tokens = 20480,
+          temperature = 0.30,
         },
       },
-    },
-    web_search_engine = {
-      provider = 'searxng',
     },
   },
   dependencies = {
