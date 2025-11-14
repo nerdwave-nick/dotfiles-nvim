@@ -3,11 +3,12 @@ return {
   event = 'VeryLazy',
   version = false, -- Never set this value to "*"! Never!
   opts = {
+    instructions_file = 'AGENTS.md',
     provider = 'claude-code',
     providers = {
       claude = {
         endpoint = 'https://api.anthropic.com',
-        model = 'claude-sonnet-4-0', --claude-opus-4-20250514',
+        model = 'claude-haiku-4-5',
         timeout = 30000, -- Timeout in milliseconds
         disabled_tools = { 'fetch' },
         extra_request_body = {

@@ -4,10 +4,10 @@ M.formatter_by_file_type = {
   rust = { 'rustfmt' },
   typescript = { 'prettierd', 'prettier', 'eslint_d', 'eslint', stop_after_first = true },
   vue = { 'prettierd', 'prettier', 'eslint_d', 'eslint', stop_after_first = true },
-  go = { 'gofumpt', 'gofmt', 'goimports' },
+  go = { 'gofmt', 'gofumpt', 'goimports' },
   lua = { 'stylua' },
   zig = { 'zigfmt' },
-  sql = { 'sqlfmt' },
+  sql = { 'sql-formatter', 'sqlfmt', stop_after_first = true },
 }
 
 M.format_with_notif = function()
