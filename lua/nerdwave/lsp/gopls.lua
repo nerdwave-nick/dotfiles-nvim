@@ -81,7 +81,7 @@ return {
   end,
   settings = {
     gopls = {
-      buildFlags = { '-tags=unit,integration' },
+      buildFlags = { '-tags=unit,integration,bench' },
     },
   },
 }

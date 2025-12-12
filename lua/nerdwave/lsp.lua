@@ -1,25 +1,9 @@
-local neoconf = require('neoconf')
-
 local function setup_lsp(lsp)
-  local config = neoconf.get('lsp.' .. lsp)
-  if config == nil then config = {} end
-  local disabled = false
-  if config.disabled ~= nil then disabled = config.disabled end
-  local lspConfig = {}
-  if config.config ~= nil then lspConfig = config.config end
-
-  local lspConf = vim.tbl_deep_extend('force', require('nerdwave.lsp.' .. lsp), lspConfig)
+  local lspConf = require('nerdwave.lsp.' .. lsp)
   lspConf.capabilities = require('blink.cmp').get_lsp_capabilities(nil, true)
 
   vim.lsp.config(lsp, lspConf)
-
-  if disabled then
-    vim.lsp.enable(lsp, false)
-    vim.notify('lsp ' .. lsp .. 'skipped...', vim.log.levels.WARN)
-  else
-    vim.lsp.enable(lsp, true)
-    vim.notify('lsp ' .. lsp .. ' enabled...', vim.log.levels.DEBUG)
-  end
+  vim.lsp.enable(lsp, true)
 end
 
 local function setup_lsps()

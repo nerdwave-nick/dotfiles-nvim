@@ -14,7 +14,7 @@ vim.keymap.set('n', '<M-j>', ':m+1<CR>', { silent = true, noremap = true })
 vim.keymap.set('v', '<M-Up>', ':m \'<-2<CR>vgv=vgv', { silent = true, noremap = false })
 vim.keymap.set('v', '<M-Down>', ':m \'>+1<CR>vgv=vgv', { silent = true, noremap = true })
 vim.keymap.set('v', '<M-k>', ':m \'<-2<CR>vgv=vgv', { silent = true, noremap = true })
-vim.keymap.set('n', '<M-j>', ':m \'>+1<CR>vgv=vgv', { silent = true, noremap = true })
+vim.keymap.set('v', '<M-j>', ':m \'>+1<CR>vgv=vgv', { silent = true, noremap = true })
 
 -- terminal mode
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
@@ -22,14 +22,14 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
 -- yoinks
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
 vim.keymap.set({ 'n', 'v' }, '<leader>Y', [["+Y]])
-vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]])
+vim.keymap.set({ 'n', 'v' }, '<leader>d', [["+d]])
 
 -- the name is the 'these are pretty neat'-agen
 vim.keymap.set('n', 'J', 'mzJ`z')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
-vim.keymap.set('n', 'n', 'nzzzv')
-vim.keymap.set('n', 'N', 'Nzzzv')
+vim.keymap.set('n', 'n', 'nzz')
+vim.keymap.set('n', 'N', 'Nzz')
 
 -- take care of the devil
 vim.keymap.set('n', 'Q', '<nop>')
@@ -90,13 +90,6 @@ vim.keymap.set(
   { noremap = true, desc = 'Show telescope builtin' }
 )
 
--- codecompanion
-local codecompanion = require('codecompanion')
-vim.keymap.set('n', '<leader>ct', codecompanion.toggle, { noremap = true, desc = 'Toggle code companion buffer' })
--- cc as shortcut for code companion
-vim.cmd([[cab cc CodeCompanion]])
-vim.keymap.set('n', '<leader>cc', codecompanion.actions, { noremap = true, desc = 'Show code companion actions' })
-
 -- harpoon
 local harpoon = require('harpoon')
 vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end)
@@ -106,3 +99,11 @@ vim.keymap.set('n', '<C-h>', function() harpoon:list():select(1) end)
 vim.keymap.set('n', '<C-t>', function() harpoon:list():select(2) end)
 vim.keymap.set('n', '<C-n>', function() harpoon:list():select(3) end)
 vim.keymap.set('n', '<C-s>', function() harpoon:list():select(4) end)
+
+local codecompanion = require('codecompanion')
+vim.keymap.set(
+  'n',
+  '<leader>aa',
+  function() codecompanion.toggle({ window_opts = { position = 'right', width = 0.4 } }) end,
+  { noremap = true, silent = true }
+)

@@ -39,10 +39,10 @@ end
 
 function M:create_progress_handle(request)
   return progress.handle.create({
-    title = ' Requesting assistance (' .. request.data.strategy .. ')',
-    message = 'In progress...',
+    title = '',
+    message = '  ',
     lsp_client = {
-      name = M:llm_role_title(request.data.adapter),
+      name = ' ' .. M:llm_role_title(request.data.adapter),
     },
   })
 end
@@ -56,11 +56,11 @@ end
 
 function M:report_exit_status(handle, request)
   if request.data.status == 'success' then
-    handle.message = 'Completed'
+    handle.message = ' Success'
   elseif request.data.status == 'error' then
     handle.message = ' Error'
   else
-    handle.message = '󰜺 Cancelled'
+    handle.message = '󰜺 Canceled'
   end
 end
 

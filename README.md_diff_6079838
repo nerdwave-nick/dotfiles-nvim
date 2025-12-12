@@ -40,3 +40,4 @@ Fast Neovim setup with sane defaults and a small, curated plugin set.
 ## Maintenance
 - Undo at `~/.vim/undodir`; swap/backup disabled.
 - After plugin changes run `:Lazy sync` and restart.
+

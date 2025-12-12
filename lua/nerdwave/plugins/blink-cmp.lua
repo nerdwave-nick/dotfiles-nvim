@@ -100,12 +100,6 @@ return {
         },
         auto_show = true,
       },
-      signature = {
-        enabled = true,
-        window = {
-          border = 'rounded',
-        },
-      },
       documentation = {
         window = {
           min_width = 10,
@@ -133,6 +127,12 @@ return {
         'exact',
         'score',
         'sort_text',
+      },
+    },
+    signature = {
+      enabled = true,
+      window = {
+        border = 'rounded',
       },
     },
     snippets = { preset = 'luasnip' },

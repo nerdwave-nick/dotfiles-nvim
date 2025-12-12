@@ -1,16 +1,16 @@
 return {
   'OXY2DEV/markview.nvim',
-  lazy = false,
+  lazy = true,
 
   -- For blink.cmp's completion
   -- source
   dependencies = {
     'saghen/blink.cmp',
   },
-  ft = { 'markdown', 'codecompanion' },
+  ft = { 'markdown', 'Avante', 'AvanteInput' },
   opts = {
     preview = {
-      filetypes = { 'markdown', 'codecompanion', 'Avante', 'AvanteInput' },
+      filetypes = { 'markdown', 'Avante', 'AvanteInput' },
       ignore_buftypes = {},
     },
   },

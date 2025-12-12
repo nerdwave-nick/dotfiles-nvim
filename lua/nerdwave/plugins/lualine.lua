@@ -1,5 +1,6 @@
 return {
   'nvim-lualine/lualine.nvim',
+  dependencies = { 'franco-ruggeri/codecompanion-lualine.nvim' },
   lazy = true,
   event = 'BufRead',
   config = function()
@@ -81,7 +82,7 @@ return {
         lualine_a = { 'mode', is_recording },
         lualine_b = { 'branch', 'diff', 'diagnostics' },
         lualine_c = { { custom_fname, path = 0 }, clients_lsp, clients_formatter },
-        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_x = { 'codecompanion', 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
       },
@@ -93,11 +94,12 @@ return {
         lualine_y = {},
         lualine_z = {},
       },
-      tabline = {},
-      winbar = {},
-      inactive_winbar = {},
-      extensions = {},
+      refresh = {
+        refresh_time = 16,
+        statusline = 16,
+        tabline = 100,
+        winbar = 100,
+      },
     })
   end,
 }
-

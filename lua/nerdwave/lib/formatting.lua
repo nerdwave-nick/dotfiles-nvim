@@ -4,10 +4,14 @@ M.formatter_by_file_type = {
   rust = { 'rustfmt' },
   typescript = { 'prettierd', 'prettier', 'eslint_d', 'eslint', stop_after_first = true },
   vue = { 'prettierd', 'prettier', 'eslint_d', 'eslint', stop_after_first = true },
-  go = { 'gofmt', 'gofumpt', 'goimports' },
+  go = { 'golangci-lint' },
   lua = { 'stylua' },
   zig = { 'zigfmt' },
   sql = { 'sql-formatter', 'sqlfmt', stop_after_first = true },
+  kdl = { 'kdlfmt' },
+  json = { lsp_fallback = true },
+  markdown = { 'mdfmt', 'markdownfmt', lsp_fallback = true, stop_after_first = true },
+  -- qml = { 'qmlformat', stop_after_first = true },
 }
 
 M.format_with_notif = function()

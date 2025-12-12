@@ -68,5 +68,11 @@ local yank_group = vim.api.nvim_create_augroup('HighlightYank', {})
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = yank_group,
   pattern = '*',
-  callback = function() vim.highlight.on_yank({}) end,
+  callback = function() vim.hl.on_yank({}) end,
 })
+
+-- Alias Avante buffers to markdown for Treesitter
+if pcall(require, "vim.treesitter") then
+  vim.treesitter.language.register("markdown", "Avante")
+  vim.treesitter.language.register("markdown", "AvanteInput")
+end
